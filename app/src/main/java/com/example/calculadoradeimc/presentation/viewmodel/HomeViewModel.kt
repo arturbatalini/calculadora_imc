@@ -1,13 +1,19 @@
 package com.example.calculadoradeimc.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.calculadoradeimc.domain.model.ImcRecord
+import com.example.calculadoradeimc.domain.model.ImcResult
+import com.example.calculadoradeimc.domain.repository.ImcRepository
 import com.example.calculadoradeimc.domain.usecase.CalculateImcUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val calculateImcUseCase: CalculateImcUseCase = CalculateImcUseCase()
+    private val calculateImcUseCase: CalculateImcUseCase = CalculateImcUseCase(),
+    private val repository: ImcRepository
 ) : ViewModel() {
 
     val genderOptions = listOf("Masculino", "Feminino")
@@ -45,10 +51,43 @@ class HomeViewModel(
             currentState.copy(activityLevel = newLevel)
         }
     }
+    /** GEMINI - início
+     * Prompt: Como fazer a implementação do banco de dados (room) utilizando como base a MVVM.
+     *
+     */
+    private fun saveRecord(result: ImcResult) {
+        val state = _uiState.value
+        val weightVal = state.weight.replace(",", ".").toDoubleOrNull() ?: 0.0
+        val heightVal = state.height.toDoubleOrNull() ?: 0.0
+        val ageVal = state.age.toIntOrNull() ?: 0
 
+
+
+
+        viewModelScope.launch {
+            val record = ImcRecord(
+                date = System.currentTimeMillis(),
+                weight = weightVal,
+                height = heightVal,
+                age = ageVal,
+                gender = state.gender,
+                activityLevel = state.activityLevel,
+                imc = result.imc,
+                imcClassification = result.imcClassification,
+                tmb = result.tbm,
+                dailyCalories = result.dailyCalories,
+                idealWeight = result.idealWeight
+            )
+            repository.insertRecord(record)
+        }
+    }
+    /** GEMINI - final */
     fun onCalculateClick() {
         val state = _uiState.value
         val result = calculateImcUseCase(height = state.height, weight = state.weight, age = state.age, gender = state.gender, activityLevel = state.activityLevel)
+        if (!result.isError) {
+            saveRecord(result)
+        }
 
         _uiState.update {
             it.copy(

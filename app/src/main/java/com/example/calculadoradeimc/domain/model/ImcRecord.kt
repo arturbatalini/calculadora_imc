@@ -1,0 +1,16 @@
+package com.example.calculadoradeimc.domain.model
+
+data class ImcRecord(
+    val id: Int = 0,
+    val date: Long,
+    val weight: Double,
+    val height: Double,
+    val age: Int,
+    val gender: String,
+    val activityLevel: String,
+    val imc: Double,
+    val imcClassification: String,
+    val tmb: Double,
+    val dailyCalories: Double,
+    val idealWeight: Double
+)

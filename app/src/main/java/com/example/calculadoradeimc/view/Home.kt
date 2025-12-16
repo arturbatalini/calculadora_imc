@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.calculadoradeimc.presentation.viewmodel.AppViewModelProvider
 import com.example.calculadoradeimc.presentation.viewmodel.HomeViewModel
 import com.example.calculadoradeimc.ui.theme.Blue
 import com.example.calculadoradeimc.ui.theme.White
@@ -45,7 +46,7 @@ import com.example.calculadoradeimc.ui.theme.White
 @Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Home(vm: HomeViewModel = viewModel()) {
+fun Home(vm: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)) {
 
     val state by vm.uiState.collectAsState()
     /** GEMINI - início

@@ -56,9 +56,9 @@ class CalculateImcUseCase {
                 val msgCalories = "Calorias Diárias: " + String.format("%.2f", dailyCalories)
 
 
-                return ImcResult(message = "$msgImc\n$msgTmb\n$msgIdealWeight\n$msgCalories", isError = false)
+                return ImcResult(message = "$msgImc\n$msgTmb\n$msgIdealWeight\n$msgCalories", isError = false, imc = imc, imcClassification = msgImc, tbm = finalTmb, dailyCalories = dailyCalories, idealWeight = idealWeightGender)
             }
         }
-        return ImcResult(message = "Preencha todos os campos", isError = true)
+        return ImcResult(message = "Preencha todos os campos", isError = true, imc = 0.0, imcClassification = "", tbm = 0.0, dailyCalories = 0.0, idealWeight = 0.0)
     }
 }
