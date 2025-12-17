@@ -22,4 +22,9 @@ class ImcRepositoryImpl(private val dao: ImcDao) : ImcRepository {
     override suspend fun deleteRecord(record: ImcRecord) {
         dao.delete(record.toEntity())
     }
+
+    class GetHistoryUseCase(private val repository: ImcRepository) {
+        operator fun invoke(): Flow<List<ImcRecord>> = repository.getAllRecords()
+    }
+
 }

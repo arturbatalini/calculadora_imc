@@ -44,9 +44,14 @@ import com.example.calculadoradeimc.ui.theme.Blue
 import com.example.calculadoradeimc.ui.theme.White
 
 @Preview
+@Composable
+fun HomePreview() {
+    Home(onNavigateToHistory = {})
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Home(vm: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)) {
+fun Home(onNavigateToHistory: () -> Unit,
+    vm: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)) {
 
     val state by vm.uiState.collectAsState()
     /** GEMINI - início
@@ -348,7 +353,26 @@ fun Home(vm: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)) 
                     .fillMaxWidth()
                     .padding(10.dp)
             )
+            Button(
+                onClick = onNavigateToHistory,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Blue,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+                    .padding(start = 50.dp, top = 20.dp, end = 50.dp, bottom = 20.dp)
+            ) {
+                Text(
+                    text = "VER HISTÓRICO",
+                    fontSize = 18.sp,
+                    color = White,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+
         }
+
     }
 }
 

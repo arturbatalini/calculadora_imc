@@ -15,6 +15,14 @@ class CalculateImcUseCase {
             if (weightFormatted != null && heightFormatted != null && ageFormatted != null) {
                 val imc = weightFormatted / (heightFormatted / 100 * heightFormatted / 100)
                 val imcFormatted = String.format("%.2f", imc)
+                val imcClassification = when {
+                    imc < 18.5 -> "IMC: $imcFormatted \n Abaixo do peso"
+                    imc in 18.5..24.9 -> "Peso normal"
+                    imc in 25.0..29.9 -> "Sobrepeso"
+                    imc in 30.0..34.9 -> "Obesidade (Grau 1)"
+                    imc in 35.0..39.9 -> "Obesidade Severa (Grau 2)"
+                    else -> "Obesidade Mórbida (Grau 3)"
+                }
                 val msgImc = when {
                     imc < 18.5 -> "IMC: $imcFormatted \n Abaixo do peso"
                     imc in 18.5..24.9 -> "IMC: $imcFormatted \n Peso normal"
@@ -56,7 +64,7 @@ class CalculateImcUseCase {
                 val msgCalories = "Calorias Diárias: " + String.format("%.2f", dailyCalories)
 
 
-                return ImcResult(message = "$msgImc\n$msgTmb\n$msgIdealWeight\n$msgCalories", isError = false, imc = imc, imcClassification = msgImc, tbm = finalTmb, dailyCalories = dailyCalories, idealWeight = idealWeightGender)
+                return ImcResult(message = "$msgImc\n$msgTmb\n$msgIdealWeight\n$msgCalories", isError = false, imc = imc, imcClassification = imcClassification, tbm = finalTmb, dailyCalories = dailyCalories, idealWeight = idealWeightGender)
             }
         }
         return ImcResult(message = "Preencha todos os campos", isError = true, imc = 0.0, imcClassification = "", tbm = 0.0, dailyCalories = 0.0, idealWeight = 0.0)
