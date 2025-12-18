@@ -1,7 +1,11 @@
 package com.example.calculadoradeimc.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "imc_history")
 data class ImcRecord(
-    val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val date: Long,
     val weight: Double,
     val height: Double,
