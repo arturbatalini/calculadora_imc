@@ -26,7 +26,7 @@ class CalculateImcUseCase {
             return createError("Peso inválido. Insira um valor positivo e realista, em kg (ex: 70.50).")
         }
 
-        if (heightFormatted <= 0 || heightFormatted > 300) {
+        if (heightFormatted <= 50 || heightFormatted > 300) {
             return createError("Altura inválida. Insira um valor positivo e realista, em cm (ex: 175).")
         }
 
