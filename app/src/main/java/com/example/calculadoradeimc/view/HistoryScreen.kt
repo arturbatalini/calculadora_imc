@@ -49,6 +49,13 @@ import java.util.Locale
 @RequiresApi(Build.VERSION_CODES.O)
 private val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale("pt", "BR"))
 
+
+/** GEMINI - início
+ * Prompt: Como fazer tela de histórico dos cálculos seguindo padrões MVVM, onde
+ * Os hitóricos devem ser ordenados por data mais recente, devem apresentar todos
+ * os detalhes dos cálculos realizados.
+
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -166,7 +173,7 @@ fun HistoryItem(
         }
     }
 }
-
+/** GEMINI - final */
 @Composable
 fun InfoColumn(label: String, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {

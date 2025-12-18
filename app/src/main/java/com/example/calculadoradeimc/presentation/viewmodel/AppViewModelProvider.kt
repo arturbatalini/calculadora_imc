@@ -10,6 +10,7 @@ import com.example.calculadoradeimc.domain.usecase.CalculateImcUseCase
 import com.example.calculadoradeimc.domain.usecase.GetHistoryUseCase
 import com.example.calculadoradeimc.domain.usecase.GetImcByIdUseCase
 
+
 object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
@@ -20,6 +21,13 @@ object AppViewModelProvider {
                 repository = app.repository
             )
         }
+
+        /** GEMINI - início
+         * Prompt: Como fazer tela de histórico dos cálculos seguindo padrões MVVM, onde
+         * Os hitóricos devem ser ordenados por data mais recente, devem apresentar todos
+         * os detalhes dos cálculos realizados.
+
+         */
         initializer {
                 val app = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as CalculadoraApplication)
                 HistoryViewModel(
@@ -35,3 +43,5 @@ object AppViewModelProvider {
         }
     }
 }
+
+/** GEMINI - final */

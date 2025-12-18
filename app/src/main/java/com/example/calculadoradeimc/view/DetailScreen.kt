@@ -47,6 +47,15 @@ import com.example.calculadoradeimc.presentation.viewmodel.DetailViewModel
 import com.example.calculadoradeimc.ui.theme.Blue
 import com.example.calculadoradeimc.ui.theme.White
 
+
+
+/** GEMINI - início
+ * Prompt: Como fazer tela de detalhes com base no histórico, onde,
+ * ao clicar em um card de histórico, deverá ser redirecionado para uma tela de detalhes
+ * que mostre todos os itens calculados, além de detalhes e interpretações textuais para
+ * as medidas.
+ */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -181,7 +190,7 @@ fun DetailScreen(
         }
     }
 }
-
+/** GEMINI - final */
 @Composable
 private fun DetailCard(title: String, icon: androidx.compose.ui.graphics.vector.ImageVector?, content: @Composable () -> Unit) {
     Card(
